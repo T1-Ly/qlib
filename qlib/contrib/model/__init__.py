@@ -40,4 +40,12 @@ except ModuleNotFoundError:
     pytorch_classes = ()
     print("ModuleNotFoundError.  PyTorch models are skipped (optional: maybe installing pytorch can fix it).")
 
-all_model_classes = (CatBoostModel, DEnsembleModel, LGBModel, XGBModel, LinearModel) + pytorch_classes
+# import tensorflow models
+try:
+    from .tensorflow_pinn import ModifiedPINN
+    tensorflow_classes = (ModifiedPINN,)
+except ModuleNotFoundError:
+    tensorflow_classes = ()
+    print("ModuleNotFoundError. TensorFlow models are skipped (optional: maybe installing tensorflow can fix it).")
+
+all_model_classes = (CatBoostModel, DEnsembleModel, LGBModel, XGBModel, LinearModel) + pytorch_classes + tensorflow_classes
